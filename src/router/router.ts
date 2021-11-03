@@ -4,22 +4,28 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/',
         name: 'home',
-        component: () => import('@/modules/pokemon/pages/ListPage.vue'),
+        component: () =>
+            import(/* webpackChunkName: "ListPage" */ '@/modules/pokemon/pages/ListPage.vue'),
     },
     {
         path: '/about',
         name: 'about',
-        component: () => import('@/modules/pokemon/pages/AboutPage.vue'),
+        component: () =>
+            import(/* webpackChunkName: "AboutPage" */ '@/modules/pokemon/pages/AboutPage.vue'),
     },
     {
         path: '/id',
         name: 'pokemon',
-        component: () => import('@/modules/pokemon/pages/PokemonPage.vue'),
+        component: () =>
+            import(/* webpackChunkName: "PokemonPage" */ '@/modules/pokemon/pages/PokemonPage.vue'),
     },
     {
         path: '/:pathMatch(.*)*',
         name: 'not-found',
-        component: () => import('@/modules/shared/pages/NotFoundPage.vue'),
+        component: () =>
+            import(
+                /* webpackChunkName: "NotFoundPage" */ '@/modules/shared/pages/NotFoundPage.vue'
+            ),
     },
 ];
 
