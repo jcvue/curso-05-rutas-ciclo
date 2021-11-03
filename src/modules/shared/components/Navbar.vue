@@ -20,7 +20,7 @@
                     <router-link
                         class="nav-link"
                         active-class="active"
-                        to="/id"
+                        :to="{ name: 'pokemon', params: { id: 51 } }"
                     >
                         Pokemon
                     </router-link>

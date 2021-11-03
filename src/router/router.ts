@@ -14,10 +14,15 @@ const routes: RouteRecordRaw[] = [
             import(/* webpackChunkName: "AboutPage" */ '@/modules/pokemon/pages/AboutPage.vue'),
     },
     {
-        path: '/:id',
+        path: '/pokemon/:id',
         name: 'pokemon',
         component: () =>
             import(/* webpackChunkName: "PokemonPage" */ '@/modules/pokemon/pages/PokemonPage.vue'),
+        props: (route) => {
+            return {
+                id: Number(route.params.id) || 1,
+            };
+        },
     },
     {
         path: '/:pathMatch(.*)*',

@@ -1,27 +1,47 @@
 <template>
     <h1>Pokemon Page</h1>
     <hr />
-    <h2>Pokemon: {{ id }}#</h2>
+    <div v-if="pokemon">
+        <h2>Pokemon: {{ id }}#</h2>
+        <img :src="pokemon.sprites.front_default" :alt="pokemon.name" />
+    </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-interface PokemonPageData {
-    id: number;
-}
 
 export default defineComponent({
     name: 'PokemonPage',
-    data(): PokemonPageData {
+    props: {
+        id: {
+            type: Number,
+            required: true,
+        },
+    },
+    data() {
         return {
-            id: 0,
+            pokemon: null,
         };
     },
-    created(): void {
-        const { id } = this.$route.params;
-        this.id = Number(id);
-        console.log(`id: ${id}`);
+    methods: {
+        async getPokemon() {
+            try {
+                const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${this.id}`).then(res => res.json());
+                console.log(pokemon);
+                this.pokemon = pokemon;
+            } catch (e) {
+                this.$router.push('/');
+            }
+        }
+    },
+    watch: {
+        id() {
+            this.getPokemon();
+        }
+    },
+    created() {
+        this.getPokemon();
     },
 })
 </script>
