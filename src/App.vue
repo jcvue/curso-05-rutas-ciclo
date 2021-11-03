@@ -1,7 +1,7 @@
 <template>
     <Navbar />
-    <main class="container-fluid text-center">
-        <img alt="Vue logo" src="./assets/logo.png" />
+    <main class="container-fluid text-center mt-2">
+        <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
         <router-view />
     </main>
 </template>
