@@ -24,6 +24,10 @@ export default defineComponent({
                 { to: { name: 'pokemon-home' }, text: 'Home' },
                 { to: { name: 'pokemon-id', params: { id: 56 } }, text: 'Pokemon', },
                 { to: { name: 'pokemon-about' }, text: 'About', },
+
+                { to: { name: 'dbz-characters' }, text: 'Personajes', },
+                { to: { name: 'dbz-about' }, text: 'DBZ About', },
+
                 { to: 'https://github.com/jcpalma', text: 'Github', external: true, },
             ] as CustomLinkProps[],
 

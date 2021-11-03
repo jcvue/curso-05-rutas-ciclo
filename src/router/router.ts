@@ -48,7 +48,32 @@ const routes: RouteRecordRaw[] = [
             },
         ],
     },
-
+    {
+        path: '/dbz',
+        name: 'dbz',
+        component: () =>
+            import(/* webpackChunkName: "DbzLayout" */ '@/modules/dbz/layouts/DbzLayout.vue'),
+        children: [
+            {
+                path: 'character',
+                name: 'dbz-characters',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "CharacterPage" */ '@/modules/dbz/pages/CharacterPage.vue'
+                    ),
+            },
+            {
+                path: 'about',
+                name: 'dbz-about',
+                component: () =>
+                    import(/* webpackChunkName: "AboutPage" */ '@/modules/dbz/pages/AboutPage.vue'),
+            },
+            {
+                path: '',
+                redirect: { name: 'dbz-character' },
+            },
+        ],
+    },
     {
         path: '/:pathMatch(.*)*',
         name: 'not-found',
