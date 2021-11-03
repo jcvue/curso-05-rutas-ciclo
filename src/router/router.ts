@@ -14,7 +14,7 @@ const routes: RouteRecordRaw[] = [
             import(/* webpackChunkName: "AboutPage" */ '@/modules/pokemon/pages/AboutPage.vue'),
     },
     {
-        path: '/id',
+        path: '/:id',
         name: 'pokemon',
         component: () =>
             import(/* webpackChunkName: "PokemonPage" */ '@/modules/pokemon/pages/PokemonPage.vue'),
