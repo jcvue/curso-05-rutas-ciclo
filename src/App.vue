@@ -1,24 +1,18 @@
 <template>
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <router-view />
+    <Navbar />
+    <main class="container-fluid text-center">
+        <img alt="Vue logo" src="./assets/logo.png" />
+        <router-view />
+    </main>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 
 export default defineComponent({
     name: 'App',
-    components: {}
+    components: {
+        Navbar: defineAsyncComponent(() => import(/* webpackChunkName: "Navbar" */ '@/modules/shared/components/Navbar.vue')),
+    }
 });
 </script>
-
-<style>
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-}
-</style>
