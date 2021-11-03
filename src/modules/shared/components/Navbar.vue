@@ -1,40 +1,37 @@
 <template>
     <nav class="navbar navbar-expand navbar-dark bg-dark">
         <div class="container-fluid">
-            <router-link class="navbar-brand fw-bold" to="/"
-                >Vue App</router-link
-            >
-
+            <span class="navbar-brand fw-bold">Vue App</span>
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <router-link
-                        class="nav-link"
-                        to="/"
-                        exact
-                        active-class="active"
-                    >
-                        Home
-                    </router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link
-                        class="nav-link"
-                        active-class="active"
-                        :to="{ name: 'pokemon', params: { id: 51 } }"
-                    >
-                        Pokemon
-                    </router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link
-                        class="nav-link"
-                        active-class="active"
-                        to="/about"
-                    >
-                        About
-                    </router-link>
+                <li v-for="link in links" class="nav-item" :key="link.text">
+                    <CustomLink :link="link">
+                        {{ link.text }}
+                    </CustomLink>
                 </li>
             </ul>
         </div>
     </nav>
 </template>
+
+<script lang="ts">
+import { defineAsyncComponent, defineComponent } from 'vue';
+import { CustomLinkProps } from '../interfaces/CustomLinkProps';
+
+export default defineComponent({
+    data() {
+        return {
+            links: [
+                { to: { name: 'home' }, text: 'Home' },
+                { to: { name: 'pokemon', params: { id: 56 } }, text: 'Pokemon', },
+                { to: { name: 'about' }, text: 'About', },
+                { to: 'https://github.com/jcpalma', text: 'Github', external: true, },
+            ] as CustomLinkProps[],
+
+        };
+    }
+    ,
+    components: {
+        CustomLink: defineAsyncComponent(() => import('./CustomLink.vue'))
+    }
+})
+</script>
