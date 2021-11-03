@@ -48,6 +48,9 @@ export default defineComponent({
     },
     beforeUnmount() {
         console.log('AboutPage.beforeUnmount');
+        setTimeout(() => {
+            console.clear();
+        }, 1000);
     },
     unmounted() {
         console.log('AboutPage.unmounted');

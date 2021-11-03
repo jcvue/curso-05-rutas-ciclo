@@ -28,7 +28,6 @@ export default defineComponent({
         async getPokemon() {
             try {
                 const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${this.id}`).then(res => res.json());
-                console.log(pokemon);
                 this.pokemon = pokemon;
             } catch (e) {
                 this.$router.push('/');
