@@ -96,10 +96,24 @@ const router = createRouter({
 });
 
 // Guard global síncrono
-router.beforeEach((to, from, next) => {
+// router.beforeEach((to, from, next) => {
+//     if (to.fullPath === '/401') return next();
+//     const rand = Math.random() * 100;
+//     rand >= 30 ? next() : next({ name: '401' });
+// });
+
+// Guard global asíncrono
+const canAccess = () => {
+    return new Promise((resolve) => {
+        const rand = Math.random() * 100;
+        rand >= 30 ? resolve(true) : resolve(true);
+    });
+};
+
+router.beforeEach(async (to, from, next) => {
     if (to.fullPath === '/401') return next();
-    const rand = Math.random() * 100;
-    rand >= 30 ? next() : next({ name: '401' });
+    const authorized = await canAccess();
+    authorized ? next() : next({ name: '401' });
 });
 
 export default router;
