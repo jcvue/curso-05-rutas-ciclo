@@ -3,27 +3,52 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
-        name: 'home',
-        component: () =>
-            import(/* webpackChunkName: "ListPage" */ '@/modules/pokemon/pages/ListPage.vue'),
+        redirect: '/pokemon',
     },
     {
-        path: '/about',
-        name: 'about',
-        component: () =>
-            import(/* webpackChunkName: "AboutPage" */ '@/modules/pokemon/pages/AboutPage.vue'),
-    },
-    {
-        path: '/pokemon/:id',
+        path: '/pokemon',
         name: 'pokemon',
         component: () =>
-            import(/* webpackChunkName: "PokemonPage" */ '@/modules/pokemon/pages/PokemonPage.vue'),
-        props: (route) => {
-            return {
-                id: Number(route.params.id) || 1,
-            };
-        },
+            import(
+                /* webpackChunkName: "PokemonLayout" */ '@/modules/pokemon/layouts/PokemonLayout.vue'
+            ),
+        children: [
+            {
+                path: 'home',
+                name: 'pokemon-home',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "ListPage" */ '@/modules/pokemon/pages/ListPage.vue'
+                    ),
+            },
+            {
+                path: 'about',
+                name: 'pokemon-about',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "AboutPage" */ '@/modules/pokemon/pages/AboutPage.vue'
+                    ),
+            },
+            {
+                path: 'pokemonid/:id',
+                name: 'pokemon-id',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "PokemonPage" */ '@/modules/pokemon/pages/PokemonPage.vue'
+                    ),
+                props: (route) => {
+                    return {
+                        id: Number(route.params.id) || 1,
+                    };
+                },
+            },
+            {
+                path: '',
+                redirect: { name: 'pokemon-home' },
+            },
+        ],
     },
+
     {
         path: '/:pathMatch(.*)*',
         name: 'not-found',

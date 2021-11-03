@@ -21,9 +21,9 @@ export default defineComponent({
     data() {
         return {
             links: [
-                { to: { name: 'home' }, text: 'Home' },
-                { to: { name: 'pokemon', params: { id: 56 } }, text: 'Pokemon', },
-                { to: { name: 'about' }, text: 'About', },
+                { to: { name: 'pokemon-home' }, text: 'Home' },
+                { to: { name: 'pokemon-id', params: { id: 56 } }, text: 'Pokemon', },
+                { to: { name: 'pokemon-about' }, text: 'About', },
                 { to: 'https://github.com/jcpalma', text: 'Github', external: true, },
             ] as CustomLinkProps[],
 
