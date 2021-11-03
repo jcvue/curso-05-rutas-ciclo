@@ -75,6 +75,12 @@ const routes: RouteRecordRaw[] = [
         ],
     },
     {
+        path: '/401',
+        name: '401',
+        component: () =>
+            import(/* webpackChunkName: "401Page" */ '@/modules/shared/pages/UnauthorizedPage.vue'),
+    },
+    {
         path: '/:pathMatch(.*)*',
         name: 'not-found',
         component: () =>
@@ -87,6 +93,13 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
+});
+
+// Guard global síncrono
+router.beforeEach((to, from, next) => {
+    if (to.fullPath === '/401') return next();
+    const rand = Math.random() * 100;
+    rand >= 30 ? next() : next({ name: '401' });
 });
 
 export default router;
