@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { isAuthenticatedGuard } from './auth-guard';
 
 const routes: RouteRecordRaw[] = [
     {
@@ -51,6 +52,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/dbz',
         name: 'dbz',
+        beforeEnter: [isAuthenticatedGuard],
         component: () =>
             import(/* webpackChunkName: "DbzLayout" */ '@/modules/dbz/layouts/DbzLayout.vue'),
         children: [
@@ -103,17 +105,17 @@ const router = createRouter({
 // });
 
 // Guard global asíncrono
-const canAccess = () => {
-    return new Promise((resolve) => {
-        const rand = Math.random() * 100;
-        rand >= 30 ? resolve(true) : resolve(true);
-    });
-};
+// const canAccess = () => {
+//     return new Promise((resolve) => {
+//         const rand = Math.random() * 100;
+//         rand >= 30 ? resolve(true) : resolve(true);
+//     });
+// };
 
-router.beforeEach(async (to, from, next) => {
-    if (to.fullPath === '/401') return next();
-    const authorized = await canAccess();
-    authorized ? next() : next({ name: '401' });
-});
+// router.beforeEach(async (to, from, next) => {
+//     if (to.fullPath === '/401') return next();
+//     const authorized = await canAccess();
+//     authorized ? next() : next({ name: '401' });
+// });
 
 export default router;
